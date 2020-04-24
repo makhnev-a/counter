@@ -8,9 +8,11 @@ class App extends React.Component{
   };
 
   onAddNum = () => {
-    this.setState({
-      countNum: this.state.countNum + 1
-    });
+    if (this.state.countNum <= 6) {
+      this.setState({
+        countNum: this.state.countNum + 1
+      });
+    }
   };
 
   onClearNum = () => {
