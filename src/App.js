@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Counter from "./Counter";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  state = {
+    countNum: 0
+  };
+
+  onAddNum = () => {
+    this.setState({
+      countNum: this.state.countNum + 1
+    });
+  };
+
+  onClearNum = () => {
+    this.setState({
+      countNum: 0
+    });
+  };
+
+  render = () => {
+    return (
+        <div className="App">
+          <section className="App-header">
+            <Counter
+                countNum={this.state.countNum}
+                onAddNum={this.onAddNum}
+                onClearNum={this.onClearNum}
+            />
+          </section>
+        </div>
+    );
+  };
 }
 
 export default App;
