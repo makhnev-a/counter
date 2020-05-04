@@ -4,7 +4,7 @@ import Button from "./Button";
 
 class Counter extends React.Component{
     classInc = () => {
-        return this.props.countNum === 5 ? 'btnDisable' : 'btn';
+        return this.props.countNum === this.props.maxValue ? 'btnDisable' : 'btn';
     };
 
     classRes = () => {
@@ -16,10 +16,11 @@ class Counter extends React.Component{
             <div>
                 <Number
                     countNum={this.props.countNum}
+                    maxValue={this.props.maxValue}
                 />
                 <Button
                     title={'Inc'}
-                    disable={this.props.countNum === 5}
+                    disable={this.props.countNum === this.props.maxValue}
                     handler={this.props.onAddNum}
                     btnStyle={this.classInc()}
                 />
