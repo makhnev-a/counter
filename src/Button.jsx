@@ -6,6 +6,7 @@ class Button extends React.Component{
     };
 
     render = () => {
+        console.log(this.props.disable);
       return (
           <button
               className={this.props.btnStyle}

@@ -8,10 +8,12 @@ class Counter extends React.Component{
     };
 
     classRes = () => {
-        return this.props.countNum < 1 ? 'btnDisable' : 'btn';
+        console.log(this.props.countNum);
+        return this.props.countNum < this.props.minValue + 1 ? 'btnDisable' : 'btn';
     };
 
     render = () => {
+        console.log(this.props.countNum < 2);
         return (
             <div>
                 <Number
@@ -26,7 +28,7 @@ class Counter extends React.Component{
                 />
                 <Button
                     title={'Reset'}
-                    disable={this.props.countNum < 1}
+                    disable={this.props.countNum < this.props.minValue + 1}
                     handler={this.props.onClearNum}
                     btnStyle={this.classRes()}
                 />

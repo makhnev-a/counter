@@ -6,7 +6,8 @@ import SetCounter from "./SetCounter";
 class App extends React.Component{
   state = {
     countNum: 0,
-    maxValue: 5
+    maxValue: 5,
+    minValue: 0
   };
 
   onAddNum = () => {
@@ -19,7 +20,7 @@ class App extends React.Component{
 
   onClearNum = () => {
     this.setState({
-      countNum: 0
+      countNum: this.state.minValue
     });
   };
 
@@ -31,7 +32,8 @@ class App extends React.Component{
 
   fixStartValue = (startValue) => {
     this.setState({
-      countNum: startValue
+      countNum: startValue,
+      minValue: startValue
     });
   };
 
@@ -50,6 +52,7 @@ class App extends React.Component{
             <Counter
                 countNum={this.state.countNum}
                 maxValue={+this.state.maxValue}
+                minValue={this.state.minValue}
                 onAddNum={this.onAddNum}
                 onClearNum={this.onClearNum}
             />
