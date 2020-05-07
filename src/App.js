@@ -29,6 +29,12 @@ class App extends React.Component{
     });
   };
 
+  fixStartValue = (startValue) => {
+    this.setState({
+      countNum: startValue
+    });
+  };
+
   render = () => {
     // console.log(typeof this.state.maxValue)
     return (
@@ -39,6 +45,7 @@ class App extends React.Component{
                 maxValue={this.state.maxValue}
                 startValue={this.state.countNum}
                 fixMaxValue={this.fixMaxValue}
+                fixStartValue={this.fixStartValue}
             />
             <Counter
                 countNum={this.state.countNum}

@@ -13,8 +13,15 @@ class SetCounter extends React.Component {
         });
     };
 
+    onStartValueChange = (event) => {
+        this.setState({
+            startValue: +event.currentTarget.value
+        });
+    };
+
     setValue = () => {
         this.props.fixMaxValue(this.state.maxValue);
+        this.props.fixStartValue(this.state.startValue);
     };
 
     render = () => {
@@ -33,6 +40,7 @@ class SetCounter extends React.Component {
                     <input
                         type="number"
                         defaultValue={this.props.startValue}
+                        onChange={this.onStartValueChange}
                     />
                 </div>
                 <Button
