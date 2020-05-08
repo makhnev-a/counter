@@ -8,12 +8,10 @@ class Counter extends React.Component{
     };
 
     classRes = () => {
-        console.log(this.props.countNum);
         return this.props.countNum < this.props.minValue + 1 ? 'btnDisable' : 'btn';
     };
 
     render = () => {
-        console.log(this.props.countNum < 2);
         return (
             <div>
                 <Number

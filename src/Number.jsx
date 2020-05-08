@@ -7,7 +7,7 @@ class Number extends React.Component{
         return (
             <div
                 className={max}
-            >Счетчик = {this.props.countNum}</div>
+            >{this.props.countNum}</div>
         );
     };
 }

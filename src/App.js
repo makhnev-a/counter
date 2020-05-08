@@ -38,12 +38,16 @@ class App extends React.Component{
   };
 
   render = () => {
-    // console.log(typeof this.state.maxValue)
+    let styleInput = this.state.countNum < 0
+        || this.state.maxValue === this.state.countNum
+        || this.state.maxValue < 0;
+
     return (
         <div className="App">
           <section className="App-header">
             <SetCounter
                 className='test'
+                styleInput={styleInput}
                 maxValue={this.state.maxValue}
                 startValue={this.state.countNum}
                 fixMaxValue={this.fixMaxValue}
