@@ -16,7 +16,8 @@ class SetCounter extends React.Component {
         let startValue = +event.currentTarget.value;
 
         if (startValue < 0) {
-            this.props.fixStartValue('incorrect value!');
+            this.props.setError('incorrect value!');
+            // this.props.fixStartValue('incorrect value!');
         } else {
             this.props.fixStartValue('click on set btn');
         }
@@ -30,14 +31,11 @@ class SetCounter extends React.Component {
     };
 
     render = () => {
-        let stl = this.props.styleInput ? 'borderRed' : '';
-
         return (
             <div>
                 <div>
                     <label htmlFor="">max value</label>
                     <input
-                        className={stl}
                         type="number"
                         defaultValue={this.props.maxValue}
                         onChange={this.onMaxValueChange}
@@ -46,7 +44,6 @@ class SetCounter extends React.Component {
                 <div>
                     <label htmlFor="">start value</label>
                     <input
-                        className={stl}
                         type="number"
                         defaultValue={this.props.startValue}
                         onChange={this.onStartValueChange}

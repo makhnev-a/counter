@@ -3,13 +3,11 @@ import Number from "./Number";
 import Button from "./Button";
 
 class Counter extends React.Component{
-    classInc = () => {
-        return this.props.countNum === this.props.maxValue ? 'btnDisable' : 'btn';
-    };
+    checkValueInc = () => (this.props.countNum === this.props.maxValue) || (this.props.countNum < 0);
+    checkValueRes = () => this.props.countNum < this.props.minValue + 1;
 
-    classRes = () => {
-        return this.props.countNum < this.props.minValue + 1 ? 'btnDisable' : 'btn';
-    };
+    classInc = () => this.checkValueInc() ? 'btnDisable' : 'btn';
+    classRes = () => this.checkValueRes() ? 'btnDisable' : 'btn';
 
     render = () => {
         return (
@@ -17,10 +15,11 @@ class Counter extends React.Component{
                 <Number
                     countNum={this.props.countNum}
                     maxValue={this.props.maxValue}
+                    messageError={this.props.messageError}
                 />
                 <Button
                     title={'Inc'}
-                    disable={this.props.countNum === this.props.maxValue}
+                    disable={this.checkValueInc()}
                     handler={this.props.onAddNum}
                     btnStyle={this.classInc()}
                 />

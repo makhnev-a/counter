@@ -7,7 +7,8 @@ class App extends React.Component{
   state = {
     countNum: 0,
     maxValue: 5,
-    minValue: 0
+    minValue: 0,
+    error: null
   };
 
   onAddNum = () => {
@@ -24,6 +25,10 @@ class App extends React.Component{
     });
   };
 
+  setError = (error) => {
+    this.setState({error});
+  };
+
   fixMaxValue = (maxVal) => {
     this.setState({
       maxValue: maxVal
@@ -38,22 +43,19 @@ class App extends React.Component{
   };
 
   render = () => {
-    let styleInput = this.state.countNum < 0
-        || this.state.maxValue === this.state.countNum
-        || this.state.maxValue < 0;
-
     return (
         <div className="App">
           <section className="App-header">
             <SetCounter
                 className='test'
-                styleInput={styleInput}
                 maxValue={this.state.maxValue}
                 startValue={this.state.countNum}
                 fixMaxValue={this.fixMaxValue}
                 fixStartValue={this.fixStartValue}
+                setError={this.setError}
             />
             <Counter
+                messageError={this.state.error}
                 countNum={this.state.countNum}
                 maxValue={+this.state.maxValue}
                 minValue={this.state.minValue}
