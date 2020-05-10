@@ -1,18 +1,24 @@
 import React from "react";
 
-class Button extends React.Component{
+class Button extends React.Component {
     clickHandler = () => {
         this.props.handler();
     };
 
     render = () => {
-      return (
-          <button
-              className={this.props.btnStyle}
-              disabled={this.props.disable}
-              onClick={this.clickHandler}
-          >{this.props.title}</button>
-      );
+        let classNames = 'btn';
+
+        if (this.props.disable) {
+            classNames += ' btnDisable';
+        }
+
+        return (
+            <button
+                className={classNames}
+                disabled={this.props.disable}
+                onClick={this.clickHandler}
+            >{this.props.title}</button>
+        );
     };
 }
 

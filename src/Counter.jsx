@@ -19,13 +19,13 @@ class Counter extends React.Component{
                 />
                 <Button
                     title={'Inc'}
-                    disable={this.checkValueInc()}
+                    disable={this.props.isDisabled}
                     handler={this.props.onAddNum}
                     btnStyle={this.classInc()}
                 />
                 <Button
                     title={'Reset'}
-                    disable={this.props.countNum < this.props.minValue + 1}
+                    disable={this.props.isDisabled}
                     handler={this.props.onClearNum}
                     btnStyle={this.classRes()}
                 />

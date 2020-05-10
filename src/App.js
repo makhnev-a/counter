@@ -8,7 +8,8 @@ class App extends React.Component{
     countNum: 0,
     maxValue: 5,
     minValue: 0,
-    error: null
+    error: null,
+    isDisabled: false
   };
 
   onAddNum = () => {
@@ -29,6 +30,8 @@ class App extends React.Component{
     this.setState({error});
   };
 
+  setDisabled = (isDisabled) => this.setState({isDisabled});
+
   fixMaxValue = (maxVal) => {
     this.setState({
       maxValue: maxVal
@@ -48,6 +51,8 @@ class App extends React.Component{
           <section className="App-header">
             <SetCounter
                 className='test'
+                isDisabled={this.state.isDisabled}
+                setDisabled={this.setDisabled}
                 maxValue={this.state.maxValue}
                 startValue={this.state.countNum}
                 fixMaxValue={this.fixMaxValue}
@@ -55,6 +60,7 @@ class App extends React.Component{
                 setError={this.setError}
             />
             <Counter
+                isDisabled={this.state.isDisabled}
                 messageError={this.state.error}
                 countNum={this.state.countNum}
                 maxValue={+this.state.maxValue}
