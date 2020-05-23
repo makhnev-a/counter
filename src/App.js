@@ -9,7 +9,8 @@ class App extends React.Component{
     maxValue: 5,
     minValue: 0,
     error: null,
-    isDisabled: false
+    isDisabled: false,
+    setCounterToggle: false
   };
 
   onAddNum = () => {
@@ -45,6 +46,12 @@ class App extends React.Component{
     });
   };
 
+  changeSetToggle = () => {
+    this.setState({
+      setCounterToggle: !this.state.setCounterToggle
+    });
+  };
+
   render = () => {
     return (
         <div className="App">
@@ -58,6 +65,7 @@ class App extends React.Component{
                 fixMaxValue={this.fixMaxValue}
                 fixStartValue={this.fixStartValue}
                 setError={this.setError}
+                setCounterToggle={this.state.setCounterToggle}
             />
             <Counter
                 isDisabled={this.state.isDisabled}
@@ -67,6 +75,7 @@ class App extends React.Component{
                 minValue={this.state.minValue}
                 onAddNum={this.onAddNum}
                 onClearNum={this.onClearNum}
+                changeSetToggle={this.changeSetToggle}
             />
           </section>
         </div>

@@ -5,6 +5,7 @@ import Button from "./Button";
 class Counter extends React.Component{
     checkValueInc = () => (this.props.countNum === this.props.maxValue) || (this.props.countNum < 0);
     checkValueRes = () => this.props.countNum < this.props.minValue + 1;
+    setBtnClick = () => this.props.changeSetToggle();
 
     render = () => {
         return (
@@ -23,6 +24,10 @@ class Counter extends React.Component{
                     title={'Reset'}
                     disable={this.checkValueRes() ? true : this.props.isDisabled}
                     handler={this.props.onClearNum}
+                />
+                <Button
+                    title={'Set'}
+                    handler={this.setBtnClick}
                 />
             </div>
         );

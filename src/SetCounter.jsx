@@ -66,7 +66,7 @@ class SetCounter extends React.Component {
 
     render = () => {
         return (
-            <div>
+            <div className={this.props.setCounterToggle ? 'showSet' : 'hideSet'}>
                 <div>
                     <label htmlFor="">max value</label>
                     <input
