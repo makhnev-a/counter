@@ -10,7 +10,6 @@ class SetCounter extends React.Component {
     };
 
     checkValid = () => {
-        console.log(this.state.startValue, this.state.maxValue)
         if (this.state.maxValue === this.state.startValue) {
             this.props.setError('incorrect value!');
 

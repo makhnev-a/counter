@@ -6,9 +6,6 @@ class Counter extends React.Component{
     checkValueInc = () => (this.props.countNum === this.props.maxValue) || (this.props.countNum < 0);
     checkValueRes = () => this.props.countNum < this.props.minValue + 1;
 
-    classInc = () => this.checkValueInc() ? 'btnDisable' : 'btn';
-    classRes = () => this.checkValueRes() ? 'btnDisable' : 'btn';
-
     render = () => {
         return (
             <div>
@@ -19,15 +16,13 @@ class Counter extends React.Component{
                 />
                 <Button
                     title={'Inc'}
-                    disable={this.props.isDisabled}
+                    disable={this.checkValueInc() ? true : this.props.isDisabled}
                     handler={this.props.onAddNum}
-                    btnStyle={this.classInc()}
                 />
                 <Button
                     title={'Reset'}
-                    disable={this.props.isDisabled}
+                    disable={this.checkValueRes() ? true : this.props.isDisabled}
                     handler={this.props.onClearNum}
-                    btnStyle={this.classRes()}
                 />
             </div>
         );
