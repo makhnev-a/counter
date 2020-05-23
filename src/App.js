@@ -13,6 +13,19 @@ class App extends React.Component{
     setCounterToggle: false
   };
 
+  componentDidMount() {
+    let counterData = JSON.parse(localStorage.getItem('counter'));
+    console.log(localStorage.getItem('counter'))
+    this.setState((prevState) => ({
+      ...prevState, counterData
+    }));
+  }
+
+  saveState = () => {
+    let stateAsString = JSON.stringify(this.state);
+    localStorage.setItem('counter', stateAsString)
+  };
+
   onAddNum = () => {
     if (this.state.countNum < this.state.maxValue) {
       this.setState({
@@ -66,6 +79,7 @@ class App extends React.Component{
                 fixStartValue={this.fixStartValue}
                 setError={this.setError}
                 setCounterToggle={this.state.setCounterToggle}
+                saveState={this.saveState}
             />
             <Counter
                 isDisabled={this.state.isDisabled}
