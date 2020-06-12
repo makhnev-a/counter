@@ -2,6 +2,9 @@ const SET_START_VALUE = 'SET_START_VALUE';
 const SET_MAX_VALUE = 'SET_MAX_VALUE';
 const ADD_COUNT_NUM = 'ADD_COUNT_NUM';
 const CLEAN_COUNT_NUM = 'CLEAN_COUNT_NUM';
+const SET_ERROR = 'SET_ERROR';
+const SET_DISABLED = 'SET_DISABLED';
+const CHANGE_SET_TOOGLE = 'CHANGE_SET_TOOGLE';
 
 const initialState = {
     countNum: 0,
@@ -35,6 +38,21 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 countNum: state.minValue
             };
+        case SET_ERROR:
+            return {
+                ...state,
+                error: action.error
+            };
+        case SET_DISABLED:
+            return {
+                ...state,
+                isDisabled: action.isDisabled
+            };
+        case CHANGE_SET_TOOGLE:
+            return {
+                ...state,
+                setCounterToggle: !state.setCounterToggle
+            };
         default:
             return state;
     }
@@ -65,5 +83,25 @@ export const addCountNum = () => {
 export const cleanCountNum = () => {
     return {
         type: CLEAN_COUNT_NUM
+    };
+};
+
+export const setError = (error) => {
+    return {
+        type: SET_ERROR,
+        error
+    };
+};
+
+export const setDisabled = (isDisabled) => {
+    return {
+        type: SET_DISABLED,
+        isDisabled
+    };
+};
+
+export const changeSetToggle = () => {
+    return {
+        type: CHANGE_SET_TOOGLE
     };
 };
