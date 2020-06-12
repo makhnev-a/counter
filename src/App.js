@@ -2,12 +2,14 @@ import React from 'react';
 import './App.css';
 import Counter from "./Counter";
 import SetCounter from "./SetCounter";
+import {connect} from "react-redux";
+import {addCountNum, cleanCountNum, setMaxValue, setStartValue} from "./Redux/CounterReducer";
 
 class App extends React.Component {
     constructor(props) {
       super(props);
 
-      const counterData = JSON.parse(localStorage.getItem('counter') || '{}');
+      // const counterData = JSON.parse(localStorage.getItem('counter') || '{}');
 
       let state = {
           countNum: 0,
@@ -18,47 +20,34 @@ class App extends React.Component {
           setCounterToggle: false
       };
 
-      if (Object.keys(counterData).length) {
-          state = counterData;
-      }
+      // if (Object.keys(counterData).length) {
+      //     state = counterData;
+      // }
 
       this.state = state;
     }
 
-    // state = {
-    //     countNum: 0,
-    //     maxValue: 5,
-    //     minValue: 0,
-    //     error: null,
-    //     isDisabled: false,
-    //     setCounterToggle: false
+    // saveState = () => {
+    //     let stateAsString = JSON.stringify(this.state);
+    //     localStorage.setItem('counter', stateAsString)
     // };
 
-    // componentDidMount() {
-    //     let counterData = JSON.parse(localStorage.getItem('counter') || '{}');
-    //     console.log(typeof counterData)
-    //     this.setState((prevState) => ({
-    //         ...prevState, ...counterData
-    //     }));
-    // }
-
-    saveState = () => {
-        let stateAsString = JSON.stringify(this.state);
-        localStorage.setItem('counter', stateAsString)
-    };
-
     onAddNum = () => {
-        if (this.state.countNum < this.state.maxValue) {
-            this.setState({
-                countNum: this.state.countNum + 1
-            });
+        if (this.props.countNum < this.props.maxValue) {
+            // this.setState({
+            //     countNum: this.state.countNum + 1
+            // });
+
+            this.props.addCountNum();
         }
     };
 
     onClearNum = () => {
-        this.setState({
-            countNum: this.state.minValue
-        });
+        // this.setState({
+        //     countNum: this.state.minValue
+        // });
+
+        this.props.cleanCountNum();
     };
 
     setError = (error) => {
@@ -67,18 +56,18 @@ class App extends React.Component {
 
     setDisabled = (isDisabled) => this.setState({isDisabled});
 
-    fixMaxValue = (maxVal) => {
-        this.setState({
-            maxValue: maxVal
-        });
-    };
-
-    fixStartValue = (startValue) => {
-        this.setState({
-            countNum: startValue,
-            minValue: startValue
-        });
-    };
+    // fixMaxValue = (maxVal) => {
+    //     this.setState({
+    //         maxValue: maxVal
+    //     });
+    // };
+    //
+    // fixStartValue = (startValue) => {
+    //     this.setState({
+    //         countNum: startValue,
+    //         minValue: startValue
+    //     });
+    // };
 
     changeSetToggle = () => {
         this.setState({
@@ -96,18 +85,19 @@ class App extends React.Component {
                         setDisabled={this.setDisabled}
                         maxValue={this.state.maxValue}
                         startValue={this.state.countNum}
-                        fixMaxValue={this.fixMaxValue}
-                        fixStartValue={this.fixStartValue}
+                        fixMaxValue={this.props.fixMaxValue}
+                        fixStartValue={this.props.fixStartValue}
+                        // fixStartValue={this.fixStartValue}
                         setError={this.setError}
                         setCounterToggle={this.state.setCounterToggle}
-                        saveState={this.saveState}
+                        // saveState={this.saveState}
                     />
                     <Counter
-                        isDisabled={this.state.isDisabled}
-                        messageError={this.state.error}
-                        countNum={this.state.countNum}
-                        maxValue={+this.state.maxValue}
-                        minValue={this.state.minValue}
+                        isDisabled={this.props.isDisabled}
+                        messageError={this.props.error}
+                        countNum={this.props.countNum}
+                        maxValue={+this.props.maxValue}
+                        minValue={this.props.minValue}
                         onAddNum={this.onAddNum}
                         onClearNum={this.onClearNum}
                         changeSetToggle={this.changeSetToggle}
@@ -118,4 +108,33 @@ class App extends React.Component {
     };
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        isDisabled: state.isDisabled,
+        maxValue: state.maxValue,
+        minValue: state.minValue,
+        countNum: state.countNum,
+        setCounterToggle: state.setCounterToggle,
+        error: state.error
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fixStartValue: (startValue) => {
+            return dispatch(setStartValue(startValue));
+        },
+        fixMaxValue: (maxVal) => {
+            return dispatch(setMaxValue(maxVal));
+        },
+        addCountNum: () => {
+            return dispatch(addCountNum());
+        },
+        cleanCountNum: () => {
+            return dispatch(cleanCountNum())
+        }
+    };
+};
+
+// export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -62,7 +62,7 @@ class SetCounter extends React.Component {
     setValue = () => {
         this.props.fixMaxValue(this.state.maxValue);
         this.props.fixStartValue(this.state.startValue);
-        this.props.saveState();
+        // this.props.saveState();
     };
 
     render = () => {
