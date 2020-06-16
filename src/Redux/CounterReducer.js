@@ -5,6 +5,8 @@ const CLEAN_COUNT_NUM = 'CLEAN_COUNT_NUM';
 const SET_ERROR = 'SET_ERROR';
 const SET_DISABLED = 'SET_DISABLED';
 const CHANGE_SET_TOOGLE = 'CHANGE_SET_TOOGLE';
+const MAX_INPUT_VALUE_CHANGE = 'MAX_INPUT_VALUE_CHANGE';
+const MIN_INPUT_VALUE_CHANGE = 'MIN_INPUT_VALUE_CHANGE';
 
 const initialState = {
     countNum: 0,
@@ -12,7 +14,9 @@ const initialState = {
     minValue: 0,
     error: null,
     isDisabled: false,
-    setCounterToggle: false
+    setCounterToggle: false,
+    isMaxInputValid: true,
+    isMinInputValid: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +57,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 setCounterToggle: !state.setCounterToggle
             };
+        case MAX_INPUT_VALUE_CHANGE:
+            return {
+                ...state,
+                isMaxInputValid: action.maxValue
+            };
+        case MIN_INPUT_VALUE_CHANGE:
+            return {
+                ...state,
+                isMinInputValid: action.minValue
+            };
         default:
             return state;
     }
@@ -60,48 +74,36 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-export const setStartValue = (startValue) => {
-    return {
-        type: SET_START_VALUE,
-        startValue
-    };
-};
+export const setStartValue = (startValue) => ({
+    type: SET_START_VALUE,
+    startValue
+});
 
-export const setMaxValue = (maxValue) => {
-    return {
-        type: SET_MAX_VALUE,
-        maxValue
-    };
-};
+export const setMaxValue = (maxValue) => ({
+    type: SET_MAX_VALUE,
+    maxValue
+});
 
-export const addCountNum = () => {
-    return {
-        type: ADD_COUNT_NUM
-    };
-};
+export const setError = (error) => ({
+    type: SET_ERROR,
+    error
+});
 
-export const cleanCountNum = () => {
-    return {
-        type: CLEAN_COUNT_NUM
-    };
-};
+export const setDisabled = (isDisabled) => ({
+    type: SET_DISABLED,
+    isDisabled
+});
 
-export const setError = (error) => {
-    return {
-        type: SET_ERROR,
-        error
-    };
-};
+export const maxInputValueChange = (maxValue) => ({
+    type: MAX_INPUT_VALUE_CHANGE,
+    maxValue
+});
 
-export const setDisabled = (isDisabled) => {
-    return {
-        type: SET_DISABLED,
-        isDisabled
-    };
-};
+export const minInputValueChange = (minValue) => ({
+    type: MIN_INPUT_VALUE_CHANGE,
+    minValue
+});
 
-export const changeSetToggle = () => {
-    return {
-        type: CHANGE_SET_TOOGLE
-    };
-};
+export const addCountNum = () => ({type: ADD_COUNT_NUM});
+export const cleanCountNum = () => ({type: CLEAN_COUNT_NUM});
+export const changeSetToggle = () => ({type: CHANGE_SET_TOOGLE});

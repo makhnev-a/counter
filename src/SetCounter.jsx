@@ -2,48 +2,32 @@ import React from "react";
 import Button from "./Button";
 
 class SetCounter extends React.Component {
-    constructor(props) {
-        super(props);
-
-        console.log(this.props);
-    }
     state = {
         maxValue: this.props.maxValue,
-        startValue: this.props.startValue,
-        isMaxInputValid: true,
-        isMinInputValid: true
+        startValue: this.props.startValue
     };
 
-    checkValid = () => {
+    checkValid = (startValue, maxValue) => {
         if (this.props.maxValue === this.props.startValue) {
             this.props.setError('incorrect value!');
 
-            this.setState({
-                isMaxInputValid: false,
-                isMinInputValid: false
-            });
-
+            this.props.maxInputValueChange(false);
+            this.props.minInputValueChange(false);
             this.props.setDisabled(true);
         } else if (this.props.maxValue < this.props.startValue) {
             this.props.setError('incorrect value!');
 
-            this.setState({
-                isMaxInputValid: false,
-                isMinInputValid: true
-            });
-
+            this.props.maxInputValueChange(false);
+            this.props.minInputValueChange(true);
             this.props.setDisabled(true);
         } else if (this.props.startValue < 0) {
             this.props.setError('incorrect value!');
-            this.setState({
-                isMinInputValid: false
-            });
+
+            this.props.minInputValueChange(false);
             this.props.setDisabled(true);
         } else {
-            this.setState({
-                isMinInputValid: true,
-                isMaxInputValid: true,
-            });
+            this.props.maxInputValueChange(true);
+            this.props.minInputValueChange(true);
             this.props.setDisabled(false);
             this.props.setError(null);
             this.props.fixStartValue('click set btn');
@@ -53,21 +37,20 @@ class SetCounter extends React.Component {
     onMaxValueChange = (event) => {
         let maxValue = +event.currentTarget.value;
         this.setState({maxValue}, () => {
-            this.checkValid(this.props.startValue, maxValue);
+            this.checkValid(this.state.startValue, maxValue);
         });
     };
 
     onStartValueChange = (event) => {
         let startValue = +event.currentTarget.value;
         this.setState({startValue}, () => {
-            this.checkValid(startValue, this.props.maxValue);
+            this.checkValid(startValue, this.state.maxValue);
         });
     };
 
-    setValue = () => {
+    setCounterValue = () => {
         this.props.fixMaxValue(this.state.maxValue);
         this.props.fixStartValue(this.state.startValue);
-        // this.props.saveState();
     };
 
     render = () => {
@@ -76,7 +59,7 @@ class SetCounter extends React.Component {
                 <div>
                     <label htmlFor="">max value</label>
                     <input
-                        className={this.state.isMaxInputValid ? '' : 'max'}
+                        className={this.props.isMaxInputValid ? '' : 'max'}
                         type="number"
                         defaultValue={this.props.maxValue}
                         onChange={this.onMaxValueChange}
@@ -85,7 +68,7 @@ class SetCounter extends React.Component {
                 <div>
                     <label htmlFor="">start value</label>
                     <input
-                        className={this.state.isMinInputValid ? '' : 'max'}
+                        className={this.props.isMinInputValid ? '' : 'max'}
                         type="number"
                         defaultValue={this.props.startValue}
                         onChange={this.onStartValueChange}
@@ -95,7 +78,7 @@ class SetCounter extends React.Component {
                     disable={this.props.isDisabled}
                     title={'Set'}
                     btnStyle={'btn'}
-                    handler={this.setValue}
+                    handler={this.setCounterValue}
                 />
             </div>
         );

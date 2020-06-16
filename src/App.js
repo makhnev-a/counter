@@ -7,6 +7,8 @@ import {
     addCountNum,
     changeSetToggle,
     cleanCountNum,
+    maxInputValueChange,
+    minInputValueChange,
     setDisabled,
     setError,
     setMaxValue,
@@ -26,6 +28,10 @@ class App extends React.Component {
                 <section className="App-header">
                     <SetCounter
                         className='test'
+                        isMaxInputValid={this.props.isMaxInputValid}
+                        isMinInputValid={this.props.isMinInputValid}
+                        maxInputValueChange={this.props.maxInputValueChange}
+                        minInputValueChange={this.props.minInputValueChange}
                         isDisabled={this.props.isDisabled}
                         setDisabled={this.props.setDisabled}
                         maxValue={this.props.maxValue}
@@ -58,32 +64,40 @@ const mapStateToProps = (state) => {
         minValue: state.minValue,
         countNum: state.countNum,
         setCounterToggle: state.setCounterToggle,
-        error: state.error
+        error: state.error,
+        isMaxInputValid: state.isMaxInputValid,
+        isMinInputValid: state.isMinInputValid
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fixStartValue: (startValue) => {
-            return dispatch(setStartValue(startValue));
+            dispatch(setStartValue(startValue));
         },
         fixMaxValue: (maxVal) => {
-            return dispatch(setMaxValue(maxVal));
+            dispatch(setMaxValue(maxVal));
         },
         addCountNum: () => {
-            return dispatch(addCountNum());
+            dispatch(addCountNum());
         },
         cleanCountNum: () => {
-            return dispatch(cleanCountNum());
+            dispatch(cleanCountNum());
         },
         setError: (error) => {
-            return dispatch(setError(error));
+            dispatch(setError(error));
         },
         setDisabled: (isDisabled) => {
-            return dispatch(setDisabled(isDisabled));
+            dispatch(setDisabled(isDisabled));
         },
         changeSetToggle: () => {
             dispatch(changeSetToggle());
+        },
+        maxInputValueChange: (maxInputValue) => {
+            dispatch(maxInputValueChange(maxInputValue));
+        },
+        minInputValueChange: (minInputValue) => {
+            dispatch(minInputValueChange(minInputValue));
         }
     };
 };
