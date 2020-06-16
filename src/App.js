@@ -7,12 +7,12 @@ import {
     addCountNum,
     changeSetToggle,
     cleanCountNum,
+    fixMaxValue,
+    fixStartValue,
     maxInputValueChange,
     minInputValueChange,
     setDisabled,
     setError,
-    setMaxValue,
-    setStartValue
 } from "./Redux/CounterReducer";
 
 class App extends React.Component {
@@ -70,36 +70,14 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fixStartValue: (startValue) => {
-            dispatch(setStartValue(startValue));
-        },
-        fixMaxValue: (maxVal) => {
-            dispatch(setMaxValue(maxVal));
-        },
-        addCountNum: () => {
-            dispatch(addCountNum());
-        },
-        cleanCountNum: () => {
-            dispatch(cleanCountNum());
-        },
-        setError: (error) => {
-            dispatch(setError(error));
-        },
-        setDisabled: (isDisabled) => {
-            dispatch(setDisabled(isDisabled));
-        },
-        changeSetToggle: () => {
-            dispatch(changeSetToggle());
-        },
-        maxInputValueChange: (maxInputValue) => {
-            dispatch(maxInputValueChange(maxInputValue));
-        },
-        minInputValueChange: (minInputValue) => {
-            dispatch(minInputValueChange(minInputValue));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {
+    fixStartValue,
+    fixMaxValue,
+    addCountNum,
+    cleanCountNum,
+    setError,
+    setDisabled,
+    changeSetToggle,
+    maxInputValueChange,
+    minInputValueChange
+})(App);

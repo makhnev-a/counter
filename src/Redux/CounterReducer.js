@@ -74,12 +74,12 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-export const setStartValue = (startValue) => ({
+export const fixStartValue = (startValue) => ({
     type: SET_START_VALUE,
     startValue
 });
 
-export const setMaxValue = (maxValue) => ({
+export const fixMaxValue = (maxValue) => ({
     type: SET_MAX_VALUE,
     maxValue
 });
