@@ -2,6 +2,11 @@ import React from "react";
 import Button from "./Button";
 
 class SetCounter extends React.Component {
+    constructor(props) {
+        super(props);
+
+        console.log(this.props);
+    }
     state = {
         maxValue: this.props.maxValue,
         startValue: this.props.startValue,
@@ -10,7 +15,7 @@ class SetCounter extends React.Component {
     };
 
     checkValid = () => {
-        if (this.state.maxValue === this.state.startValue) {
+        if (this.props.maxValue === this.props.startValue) {
             this.props.setError('incorrect value!');
 
             this.setState({
@@ -19,7 +24,7 @@ class SetCounter extends React.Component {
             });
 
             this.props.setDisabled(true);
-        } else if (this.state.maxValue < this.state.startValue) {
+        } else if (this.props.maxValue < this.props.startValue) {
             this.props.setError('incorrect value!');
 
             this.setState({
@@ -28,7 +33,7 @@ class SetCounter extends React.Component {
             });
 
             this.props.setDisabled(true);
-        } else if (this.state.startValue < 0) {
+        } else if (this.props.startValue < 0) {
             this.props.setError('incorrect value!');
             this.setState({
                 isMinInputValid: false
@@ -48,14 +53,14 @@ class SetCounter extends React.Component {
     onMaxValueChange = (event) => {
         let maxValue = +event.currentTarget.value;
         this.setState({maxValue}, () => {
-            this.checkValid(this.state.startValue, maxValue);
+            this.checkValid(this.props.startValue, maxValue);
         });
     };
 
     onStartValueChange = (event) => {
         let startValue = +event.currentTarget.value;
         this.setState({startValue}, () => {
-            this.checkValid(startValue, this.state.maxValue);
+            this.checkValid(startValue, this.props.maxValue);
         });
     };
 

@@ -26,24 +26,24 @@ class App extends React.Component {
                 <section className="App-header">
                     <SetCounter
                         className='test'
-                        isDisabled={this.props.isDisabled} //
-                        setDisabled={this.props.setDisabled} //
-                        maxValue={this.props.maxValue} //
-                        startValue={this.props.countNum} //
-                        fixMaxValue={this.props.fixMaxValue} //
-                        fixStartValue={this.props.fixStartValue} //
-                        setError={this.props.setError} //
-                        setCounterToggle={this.props.setCounterToggle} //
+                        isDisabled={this.props.isDisabled}
+                        setDisabled={this.props.setDisabled}
+                        maxValue={this.props.maxValue}
+                        startValue={this.props.countNum}
+                        fixMaxValue={this.props.fixMaxValue}
+                        fixStartValue={this.props.fixStartValue}
+                        setError={this.props.setError}
+                        setCounterToggle={this.props.setCounterToggle}
                     />
                     <Counter
-                        isDisabled={this.props.isDisabled} //
-                        messageError={this.props.error} //
-                        countNum={this.props.countNum} //
-                        maxValue={+this.props.maxValue} //
-                        minValue={this.props.minValue} //
-                        onAddNum={this.onAddNum} //
-                        onClearNum={this.props.cleanCountNum} //
-                        changeSetToggle={this.props.changeSetToggle}//
+                        isDisabled={this.props.isDisabled}
+                        messageError={this.props.error}
+                        countNum={this.props.countNum}
+                        maxValue={+this.props.maxValue}
+                        minValue={this.props.minValue}
+                        onAddNum={this.onAddNum}
+                        onClearNum={this.props.cleanCountNum}
+                        changeSetToggle={this.props.changeSetToggle}
                     />
                 </section>
             </div>
